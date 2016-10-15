@@ -28,7 +28,7 @@ module.exports = (robot) ->
     avgLength = avg.toString().length
 
     all = Object.keys(poker.votes).map((v) => poker.votes[v])
-    res.send all
+
     min = Math.min(all...);
     minLength = min.toString().length
 
