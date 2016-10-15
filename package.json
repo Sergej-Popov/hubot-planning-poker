@@ -20,7 +20,7 @@
       "email": "josh@technicalpickles.com"
     }
   ],
-  "name": "planning-poker",
+  "name": "hubot-planning-poker",
   "repository": {
     "type": "git",
     "url": "git://github.com/Sergej-Popov/hubot-planning-poker.git"
@@ -34,6 +34,6 @@
     "coffee-script": "~1.11.1",
     "mocha": "~3.1.2",
     "sinon": "~1.17.6",
-    "sinon-chai": "~s2.8.0"
+    "sinon-chai": "~2.8.0"
   }
 }
