@@ -1,0 +1,39 @@
+{
+  "author": {
+    "name": "Sergej Popov",
+    "email": "sergejpopov@outlook.com"
+  },
+  "description": "Hubot script for poker planning",
+  "keywords": [
+    "hubot",
+    "hubot-scripts",
+    "poker",
+    "planning",
+    "scrum",
+    "xp"
+  ],
+  "license": "MIT",
+  "main": "index.coffee",
+  "maintainers": [
+    {
+      "name": "Sergej Popov",
+      "email": "josh@technicalpickles.com"
+    }
+  ],
+  "name": "planning-poker",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Sergej-Popov/hubot-planning-poker.git"
+  },
+  "scripts": {
+    "test": "mocha --compilers coffee:coffee-script/register"
+  },
+  "version": "1.0.0",
+  "devDependencies": {
+    "chai": "~3.5.0",
+    "coffee-script": "~1.11.1",
+    "mocha": "~3.1.2",
+    "sinon": "~1.17.6",
+    "sinon-chai": "~s2.8.0"
+  }
+}
