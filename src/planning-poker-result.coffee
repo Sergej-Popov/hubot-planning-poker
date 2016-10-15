@@ -1,7 +1,7 @@
 module.exports = (robot) ->
   return (res) ->
-
     story = res.match[1]
+    showCards = res.match[2]
     poker = robot.brain.get("poker-#{story}")
     if !poker
       res.send 'Story not found'
@@ -17,12 +17,11 @@ module.exports = (robot) ->
       voteLength = poker.votes[user].toString().length
       sum += poker.votes[user]
 
-      res.send("#{user}:\n" +
-          "+--#{'-'.repeat voteLength}--+\n" +
-          "|  #{' '.repeat voteLength}  |\n" +
-          "|  #{poker.votes[user]}  |\n" +
-          "|  #{' '.repeat voteLength}  |\n" +
-          "+--#{'-'.repeat voteLength}--+\n")
+      if showCards
+        res.send("#{user}:\n" +
+            "+--#{'-'.repeat voteLength}--+\n" +
+            "|  #{poker.votes[user]}  |\n" +
+            "+--#{'-'.repeat voteLength}--+\n")
 
     avg = Math.round(sum / Object.keys(poker.votes).length * 100) / 100;
     avgLength = avg.toString().length
@@ -35,12 +34,14 @@ module.exports = (robot) ->
     max = Math.max(all...);
     maxLength = max.toString().length
 
-    res.send("avg#{' '.repeat avgLength}     " + "min#{' '.repeat minLength}     " + "max#{' '.repeat minLength}\n" +
-             "+==#{'='.repeat avgLength}==+  " + "+==#{'='.repeat minLength}==+  " + "+==#{'='.repeat maxLength}==+\n" +
-             "|  #{' '.repeat avgLength}  |  " + "|  #{' '.repeat minLength}  |  " + "|  #{' '.repeat maxLength}  |\n" +
-             "|  #{avg}  |  "                  + "|  #{min}  |  "                  + "|  #{max}  |\n"                  +
-             "|  #{' '.repeat avgLength}  |  " + "|  #{' '.repeat minLength}  |  " + "|  #{' '.repeat maxLength}  |\n" +
-             "+==#{'='.repeat avgLength}==+  " + "+==#{'='.repeat minLength}==+  " + "+==#{'='.repeat maxLength}==+\n")
+    if showCards
+      res.send("avg#{' '.repeat avgLength}     " + "min#{' '.repeat minLength}     " + "max#{' '.repeat minLength}\n" +
+          "+==#{'='.repeat avgLength}==+  " + "+==#{'='.repeat minLength}==+  " + "+==#{'='.repeat maxLength}==+\n" +
+          "|  #{avg}  |  " + "|  #{min}  |  " + "|  #{max}  |\n" +
+          "+==#{'='.repeat avgLength}==+  " + "+==#{'='.repeat minLength}==+  " + "+==#{'='.repeat maxLength}==+\n")
+    else
+      res.send("avg: #{avg}; min: #{min}; max: #{max};")
+
 
     stats = {}
 
@@ -58,4 +59,4 @@ module.exports = (robot) ->
       res.send "#{stat} x #{stats[stat].length} [#{stats[stat]}]"
 
     timeDiff = poker.end - poker.start;
-    res.send "time since start: #{Math.floor(timeDiff/60000)} min, #{Math.floor(timeDiff%60000/1000)} sec"
+    res.send "time since start: #{Math.floor(timeDiff / 60000)} min, #{Math.floor(timeDiff % 60000 / 1000)} sec"

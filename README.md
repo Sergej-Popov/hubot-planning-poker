@@ -23,6 +23,8 @@ Records user vote
 
 **poker vote #\<story_number> \<vote> [-u \<username>]**
 
+[-u \<username>] allows to override default name. Useful for testing.
+
 ```
 hubot> poker vote #4264 3
 hubot> UserA has voted for story #123
@@ -42,44 +44,36 @@ hubot> poker clear #4264
 
 Prints all votes and statistics
 
-**poker result #\<story_number>**
+**poker result #\<story_number> [-c]**
+
+[-c] pretty prints vote results as cards. Might display incorrectly if font in output is not monospaced
 
 ```
-hubot> poker result #4264
+hubot> poker result #4264 -c
 hubot> Result for story #4264
        rob:
        +-----+
-       |     |
        |  5  |
-       |     |
        +-----+
        
        bob:
        +-----+
-       |     |
        |  8  |
-       |     |
        +-----+
        
        mob:
        +-----+
-       |     |
        |  8  |
-       |     |
        +-----+
        
        hob:
        +------+
-       |      |
        |  13  |
-       |      |
        +------+
        
        avg        min      max
        +=======+  +=====+  +======+
-       |       |  |     |  |      |
        |  8.5  |  |  5  |  |  13  |
-       |       |  |     |  |      |
        +=======+  +=====+  +======+
        
        stats:
