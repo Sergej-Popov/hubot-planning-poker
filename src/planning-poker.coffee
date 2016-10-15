@@ -5,4 +5,4 @@ module.exports = (robot) ->
 
   robot.hear /poker clear #(\d+)/i, require('./planning-poker-clear')(robot)
 
-  robot.hear /poker help/i, require('./planning-poker-help')(robot)
+  robot.hear /poker (help|-h)/i, require('./planning-poker-help')(robot)
