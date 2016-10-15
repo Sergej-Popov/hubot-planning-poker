@@ -32,7 +32,7 @@ hubot> UserA has voted for story #123
 
 Deletes user story
 
-**poker result #\<story_number>**
+**poker clear #\<story_number>**
 
 ```
 hubot> poker clear #4264
