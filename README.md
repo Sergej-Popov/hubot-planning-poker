@@ -27,7 +27,10 @@ Records user vote
 
 ```
 hubot> poker vote #4264 3
-hubot> UserA has voted for story #123
+hubot> ShellUser has voted for story #123
+hubot> 
+hubot> poker vote #4264 3 -u bob
+hubot> bob has voted for story #123
 ```
 
 ### Clear
