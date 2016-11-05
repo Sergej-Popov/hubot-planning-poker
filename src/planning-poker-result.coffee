@@ -4,12 +4,13 @@ module.exports = (robot) ->
     showCards = res.match[2]
     poker = robot.brain.get("poker-#{story}")
     if !poker
-      res.send 'Story not found'
+      res.send "Story ##{story} not found ¯\\_(ツ)_/¯"
       return
 
     poker.end = new Date
+    result = "```\n"
 
-    res.send "Result for story ##{story}"
+    result += "Result for story ##{story}\n"
 
     sum = 0
 
@@ -18,7 +19,7 @@ module.exports = (robot) ->
       sum += poker.votes[user]
 
       if showCards
-        res.send("#{user}:\n" +
+        result +=("#{user}:\n" +
             "+--#{'-'.repeat voteLength}--+\n" +
             "|  #{poker.votes[user]}  |\n" +
             "+--#{'-'.repeat voteLength}--+\n")
@@ -35,12 +36,12 @@ module.exports = (robot) ->
     maxLength = max.toString().length
 
     if showCards
-      res.send("avg#{' '.repeat avgLength}     " + "min#{' '.repeat minLength}     " + "max#{' '.repeat minLength}\n" +
+      result +=("avg#{' '.repeat avgLength}     " + "min#{' '.repeat minLength}     " + "max#{' '.repeat minLength}\n" +
           "+==#{'='.repeat avgLength}==+  " + "+==#{'='.repeat minLength}==+  " + "+==#{'='.repeat maxLength}==+\n" +
           "|  #{avg}  |  " + "|  #{min}  |  " + "|  #{max}  |\n" +
           "+==#{'='.repeat avgLength}==+  " + "+==#{'='.repeat minLength}==+  " + "+==#{'='.repeat maxLength}==+\n")
     else
-      res.send("avg: #{avg}; min: #{min}; max: #{max};")
+      result +=("avg: #{avg}; min: #{min}; max: #{max};\n")
 
 
     stats = {}
@@ -54,9 +55,12 @@ module.exports = (robot) ->
       stats[key].push v
       return
 
-    res.send 'stats:'
+    result += 'stats:\n'
     for stat of stats
-      res.send "#{stat} x #{stats[stat].length} [#{stats[stat]}]"
+      result += "#{stat} x #{stats[stat].length} [#{stats[stat]}]\n"
 
     timeDiff = poker.end - poker.start;
-    res.send "time since start: #{Math.floor(timeDiff / 60000)} min, #{Math.floor(timeDiff % 60000 / 1000)} sec"
+    result += "time since start: #{Math.floor(timeDiff / 60000)} min, #{Math.floor(timeDiff % 60000 / 1000)} sec\n"
+    result += "\n```"
+
+    res.send(result)
